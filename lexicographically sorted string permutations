@@ -1,0 +1,27 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+void permute(string s, int l, int r, vector<string> &res){
+	if(l==r)
+      res.push_back(s);
+  	else{
+    	for(int i=l; i<=r;i++){
+          	swap(s[i], s[l]);
+            permute(s,l+1,r,res);
+          	swap(s[i],s[l]);
+        }
+    }
+}
+
+
+int main()
+{
+  string s; //input string
+  cin>>s;
+  vector<string> result; //vector to store permutations for sorting
+  permute(s,0,s.size()-1,result);
+  sort(result.begin(),result.end());
+  for( auto i = result.begin(); i!=result.end(); i++)
+    cout<<(*i)<<endl;
+  return 0;
+}
