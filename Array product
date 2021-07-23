@@ -1,0 +1,67 @@
+#include<iostream>
+using namespace std;
+
+void work(int arr[], int size){
+  	int pre[size];
+  	int pos[size];
+  	pre[0]=1, pos[size-1]=1;
+  	for(int i=1; i<size; i++){
+      	pre[i]= pre[i-1]* arr[i-1];
+    }
+  	for(int i=size-1; i>0; i--){
+      	pos[i-1] = pos[i] * arr[i];
+    }
+  	for(int i=0; i<size; i++){
+      	cout<< pre[i]*pos[i]<<endl;
+    }
+}
+
+int main()
+{
+  int n,prod=1;
+  cin>>n;
+  int arr[n];
+  for(int i=0; i<n; i++)
+    cin>>arr[i];
+  work(arr,n);
+  return 0;
+}
+
+
+
+////////////////////Using one extra array
+
+#include<iostream>
+using namespace std;
+
+void work(int arr[], int size){
+  	if (size==1){
+      cout<<0;
+      return;
+    }
+  	int pre[size];
+  	int temp =1;
+  	for(int i=0; i<size; i++){
+      	pre[i]= temp;
+      	temp*= arr[i];
+    }
+  	temp =1;
+  	for(int i=size-1; i>=0; i--){
+      	pre[i]*= temp;
+      	temp*= arr[i];
+    }
+  	for(int i=0; i<size; i++){
+      	cout<< pre[i]<<endl;
+    }
+}
+
+int main()
+{
+  int n,prod=1;
+  cin>>n;
+  int arr[n];
+  for(int i=0; i<n; i++)
+    cin>>arr[i];
+  work(arr,n);
+  return 0;
+}
