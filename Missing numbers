@@ -1,0 +1,19 @@
+vector<int> missingNumbers(vector<int> arr, vector<int> brr) {
+    unordered_map<int, int> store;
+    vector<int> result;
+    for(int i=0; i<arr.size(); i++)
+        store[arr[i]]++;
+    for(int i=0; i<brr.size(); i++){
+        if(store.find(brr[i])== store.end()|| store[brr[i]]==0)
+            result.push_back(brr[i]);
+        else {
+        store[brr[i]]--;
+        }
+    }
+    sort(result.begin(), result.end());
+    for(int i=1; i<result.size(); i++){
+        if(result[i]==result[i-1])
+            result.erase(result.begin()+i);
+    }
+    return result;
+}
