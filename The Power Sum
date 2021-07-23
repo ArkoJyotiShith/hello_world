@@ -1,0 +1,23 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int Xsum(int sum,int power,int base, int currsum ){
+    int now = pow(base,power);
+    if(currsum + now == sum)
+        return 1;
+    if(currsum >sum || now> sum)
+        return 0;
+    return Xsum(sum,power, base+1, currsum) + Xsum(sum,power, base+1, currsum+now);
+}
+
+int powerSum(int X, int N) {
+    return Xsum(X,N,1,0);
+}
+
+int main()
+{
+    int X,N;
+    cin>>X>>N;
+    cout<<powerSum(X, N);
+}
+
