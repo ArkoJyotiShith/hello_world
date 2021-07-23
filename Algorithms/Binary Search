@@ -1,0 +1,34 @@
+#include<iostream>
+using namespace std;
+
+void search(int arr[], int low, int high, int key){
+  	if(low>high){
+    	cout<<"Not found";
+    	return;
+	  }
+  	
+  		int mid = low + (high-low)/2;
+  		if(arr[mid] == key){
+		    cout<<mid; //output location
+		    return;
+	    }
+	  	else if(arr[mid]>key)
+		    search(arr,low,mid-1,key);
+	  	else
+		    search(arr,mid+1,high,key);
+}
+    
+
+int main()
+{
+  int n; //array size, cancelable by replace array with vector
+  cin>>n;
+  int arr[n]; //can use vector if size unknown
+  for(int i=0; i<n; i++){
+    cin>>arr[i];
+  }
+  int x;
+  cin>>x;
+  search(arr,0,n-1,x);
+  return 0;
+}
