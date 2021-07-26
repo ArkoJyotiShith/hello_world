@@ -1,0 +1,37 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+
+int main()
+{
+  int n,k,count=0; //count is ans
+  cin>>n;
+  char store[n]; //this is array
+  vector<int> pol,thief;  //pol = police
+  for(int i=0; i<n; i++){
+    cin>>store[i];
+    if(store[i]=='P')
+      	pol.push_back(i); 
+    else
+      	thief.push_back(i);
+  }
+  cin>>k;
+  int i=0, j=0, m=pol.size(); 
+  n=thief.size();
+  while(i<m && j<n){
+    if(abs(pol[i]-thief[j]<=k)){ //caught
+       	count++;
+      	i++;
+      	j++;
+  	}
+    else if(thief[j]<pol[i])  // increment lower value between 
+       	j++;                  // left most thief/police
+    else                      // because initial i(police) & j(thief)  
+    	i++;                    // are '0'.
+  }
+ 	cout<<"Maximum thieves caught: "<<count;
+  return 0;
+}
+
+//////////////////////////////No arrays. Approach, if uncaught thief is left of police, find next thief else find next police/////////////
+
