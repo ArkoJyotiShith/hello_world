@@ -43,23 +43,18 @@ int main()
 {
   int n,k,count=0,p=-1,t=-1;
   cin>>n;
+  //cout<<n<<endl;
   char store[n];
   for(int i=0; i<n; i++){
     cin>>store[i];
+    if(store[i]=='P' && p==-1)
+      	p=i;
+    if(store[i]=='T' && t==-1)
+      	t=i;
+    //cout<<"store["<<i<<"] = "<<store[i]<<" ";
   }
-  for (int i = 0; i < n; i++) {
-        if (store[i] == 'P') {
-            p = i;
-            break;
-        }
-    }
-	for (int i = 0; i < n; i++) {
-        if (store[i] == 'T') {
-            t = i;
-            break;
-        }
-    }
   cin>>k;
+  //cout<<endl;
   if(p==-1 || t==-1){
 	cout<<"Maximum thieves caught: 0";
 	return 0;
@@ -67,12 +62,17 @@ int main()
   while(p<n && t<n){
     if(abs(p-t)<=k){
       p++; 
-      while(p<n && store[p]!='P')
+      while(p<n && store[p]!='P'){
         p++;
+      	//cout<<"store["<<p<<"] = "<<store[p]<<endl;
+      }
       t++;
-      while( t<n && store[t]!='T')
+      while( t<n && store[t]!='T'){
         t++;
+      	//cout<<"store["<<t<<"] = "<<store[t]<<endl;
+      }
       count++;
+      //cout<<"p & t after catch "<<p<<" "<<t<<endl;
   	}
     else if(t<p){
       t++;
@@ -84,6 +84,7 @@ int main()
       while(p<n && store[p]!='P' )
         p++;
     }
+    //cout<<"p & t in loop "<<p<<" "<<t<<endl;
   }
  	cout<<"Maximum thieves caught: "<<count;
   return 0;
