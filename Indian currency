@@ -1,0 +1,19 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+  int n;
+  cin>>n;
+  int coin[] = {1, 2, 5, 10, 20, 50, 100, 500, 1000};
+  for(int i=8; i>=0; i--){
+  	if(n>=coin[i]){
+  		int x = n/coin[i];
+  		while(x){
+  			cout<<coin[i]<<"  ";
+  			x--;
+  		}
+  		n=n%coin[i];
+  	}
+  }
+  return 0;
+}
