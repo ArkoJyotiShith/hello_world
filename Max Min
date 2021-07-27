@@ -1,0 +1,28 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int maxMin(int k, vector<int> arr) {
+    sort(arr.begin(), arr.end());
+    int min = arr[k-1]-arr[0];
+    int arr_size = arr.size();
+    for(int i=1; i<arr_size-k+1; i++){
+        int diff = arr[i+k-1]-arr[i];
+        if(diff<min)
+            min = diff;
+    }
+    return min;
+}
+
+int main()
+{
+    int n,k,a;
+    cin>>n>>k; //input array and subarray size
+    vector<int> x; //can use array here as well
+    for(int i=0; i<n ;i++){
+        cin>>a;
+        x.push_back(a);
+    }
+    cout<<maxMin(k,x);
+    return 0;    
+}
