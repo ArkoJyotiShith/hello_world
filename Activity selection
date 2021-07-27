@@ -1,0 +1,36 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+struct act{
+  int start, end,index; //start and end times, index is task number
+};
+
+bool cmp(struct act a, struct act b){
+	return a.end<b.end;
+}
+
+int main()
+{
+	int n;
+	cin>> n;
+	struct act a[n];
+	for(int i=0; i<n; i++)
+		cin>>a[i].start;
+	
+	for(int i=0; i<n; i++){
+		cin>> a[i].end;
+		a[i].index = i;
+	}
+	sort(a,a+n, cmp);
+	//for(int i=0; i<n; i++)
+	//	cout<<"Act "<<i<<" start:"<<a[i].start<<" end:"<<a[i].end<<endl;
+	int i=0;
+	cout<<i<<" ";
+	for(int j=1; j<n; j++){
+		if(a[i].end<=a[j].start){
+			cout<<a[j].index<<" ";
+			i=j;
+		}
+	}
+	return 0;
+}
