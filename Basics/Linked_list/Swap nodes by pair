@@ -1,0 +1,51 @@
+
+#include <bits/stdc++.h>
+using namespace std;
+
+typedef struct node{
+    long long data;
+    struct node *next;
+}Node;
+
+void append(Node **head, int x){
+    Node *dummy = (Node*)malloc(sizeof(Node));
+    dummy->data = x;
+    dummy->next = NULL;
+    if(*head==NULL)
+        *head = dummy;
+    else{
+        Node *last = *head;
+        while(last->next)
+            last= last->next;
+        last->next = dummy;
+    }
+    return;
+}
+
+
+
+void swapbypair(Node *head){
+    Node *temp= head;
+    while(temp && temp->next){
+        int x= temp->data;
+        temp->data= temp->next->data;
+        temp->next->data = x;
+        temp=temp->next->next;
+    }
+}
+
+int main(){
+    long long x;
+    cin>>x;
+    Node *head = NULL;
+    while(x>=0){
+        append(&head, x);
+        cin>>x;
+    }
+    swapbypair(head);
+    while(head){
+        cout<<head->data<<endl;
+        head= head->next;
+    }
+    return 0;
+}
