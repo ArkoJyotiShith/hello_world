@@ -1,0 +1,58 @@
+
+#include <bits/stdc++.h>
+using namespace std;
+
+typedef struct node{
+    int data;
+    struct node *next;
+} Node;
+
+Node* reverse(Node *head, int k){
+    Node *current=head;
+    Node *prev = NULL;
+    Node *temp = NULL;
+    int count = 0;
+    while(current && count<k){
+        temp = current->next;
+        current->next = prev;
+        prev = current;
+        current = temp;
+        count++;
+    }
+    if(temp)                          //temp is now k+1 th node. head is now the 
+        head->next = reverse(temp,k); //last node of reversed group, so next of
+    return prev;                      //head will be head of reversed group
+}
+
+void append(Node **head,int x){
+    Node *dummy= (Node*)malloc(sizeof(Node));
+    dummy->data = x;
+    dummy->next = NULL;
+    if(*head == NULL)
+        *head = dummy;
+    else{
+        Node *last = *head;
+        while(last->next)
+            last = last->next;
+        last->next = dummy;
+    }
+    return;
+}
+
+int main(){
+    int x;
+    cin>>x;
+    Node *head=NULL;
+    while(x>=0){
+        append(&head, x);
+        cin>>x;
+    }
+    int k;
+  	cin>>k;
+    head = reverse(head,k);
+    while(head){
+        cout<<head->data<<endl;
+        head=head->next;
+    }
+    return 0;
+}
