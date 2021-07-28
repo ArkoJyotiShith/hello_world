@@ -1,0 +1,49 @@
+
+#include <bits/stdc++.h>
+using namespace std;
+
+typedef struct node{
+    int roll;
+    struct node *next;
+}Node;
+
+void append(Node **head, int data){
+    Node *temp = (Node*) malloc(sizeof(Node));
+    Node *last = *head;
+    temp->roll = data;
+    temp->next = NULL;
+    if(*head==NULL){
+        *head = temp;
+    }
+    else{
+        while(last->next){
+            if(last->roll == data)
+                return ;
+            last = last->next;
+        }
+        if(last->roll!=data)
+            last->next = temp;
+    }
+    return;
+}
+
+int main()
+{
+  int x;
+  cin>>x;
+  Node *head = NULL;
+  while(x>=0){
+      append(&head, x);
+      cin>>x;
+  }
+  Node *temp = head;
+  if(temp==NULL){
+    cout<<"List is empty";
+    return 0;
+  }
+  while(temp){
+      cout<<temp->roll<<endl;
+      temp = temp->next;
+  }
+  return 0;
+}
