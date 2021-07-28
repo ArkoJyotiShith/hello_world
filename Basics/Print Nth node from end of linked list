@@ -1,0 +1,133 @@
+
+#include <bits/stdc++.h>
+using namespace std;
+
+struct Node{
+    int data; 
+    struct Node *next ;
+};
+
+void print(struct Node *head,int n, int len){
+    struct Node* temp= head;
+    //if(temp==NULL){
+      //  cout<<"Empty Linked List ";
+        //return;
+    //}
+    for(int j=1; j<len-n+1; j++){
+        //cout<<temp->data<<" ";
+        temp = temp->next;
+    }
+    cout<<temp->data<<" is the nth node element in the list";
+    return;
+}
+
+void push(struct Node **head, int x){
+    struct Node *newNode = new Node;
+    struct Node *last = *head;
+    newNode->data = x;
+    newNode->next = NULL;
+    if(*head == NULL)
+        *head = newNode;
+    else{
+        while(last->next !=NULL){
+            last= last->next;
+        }
+        last->next = newNode;
+    }
+}
+
+int main()
+{
+    int x,i=0;
+    struct Node *head = NULL;
+    cin>>x;
+    while(x!=-1){
+        i++;
+        push(&head, x);
+        cin>>x;
+    }
+    //cout<<i<<endl;
+    cout<<"Enter the nth node:"<<endl;
+    int n;
+    cin>>n;
+    if(n>i){
+        cout<<"There is no nth node in the list";
+        return 0;
+    }
+    print(head, n,i);
+    return 0;
+}
+
+
+///////////doubly linked list////////////////
+
+
+#include <bits/stdc++.h>
+using namespace std;
+
+class Node{
+    public:
+    int data; 
+    struct Node *next, *prev;
+};
+
+void append(Node **head, int data){
+  	Node *temp, *newNode;
+  	temp= *head;
+  	newNode = new Node();
+  	newNode->prev = NULL;
+  	newNode->next = NULL;
+  	newNode->data= data;
+  	if(*head ==NULL)
+  	    *head= newNode;
+  	else{
+  	    while(temp->next)
+  	        temp=temp->next;
+  	    temp->next = newNode;
+  	    newNode->prev = temp;
+  	}
+}
+
+Node* work(Node *head, int n){
+    int count =1, in=0;
+    while(head->next){
+        head=head->next;
+        count++;
+    }
+    if(n==0 ||n>count)
+        return NULL;
+    else if(n==1)
+        return head;
+    else{
+        while(head->prev){
+            if(in == n-1)
+                return head;
+            else{
+                head=head->prev;
+                in++;
+            }
+        }
+    }
+        
+    
+        
+}
+
+
+int main(){
+    Node *head = NULL;
+    int data,n;
+    cin>>data;
+    while(data>0){
+        append(&head,data);
+        cin>>data;
+    }
+    cin>>n;
+    Node *result = work(head, n);
+    cout<<"Enter the nth node:"<<endl;
+    if(result==NULL)
+        cout<<"There is no nth node in the list";
+    else
+        cout<<result->data<<" is the nth node element in the list";
+    return 0;
+}
